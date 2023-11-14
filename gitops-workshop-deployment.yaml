@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitops-workshop-deployment
+  labels:
+    app: gitops-workshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitops-workshop
+  template:
+    metadata:
+      labels:
+        app: gitops-workshop
+    spec:
+      containers:
+      - name: gitops-workshop-website
+        image: https://hub.docker.com/repository/docker/davidverburg/gitops-workshop
+        ports:
+        - containerPort: 80
