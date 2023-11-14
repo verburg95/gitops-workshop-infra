@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: gitops-workshop-project
+  labels:
+    app: gitops-workshop
+spec:
+  # Project description
+  description: An ArgoCD Project to run our apps locally
+  # Allow manifests to deploy only from Sokube git repositories
+  sourceRepos:
+  - "https://github.com/<your github username>/*"
+  # Only permit to deploy applications in the same cluster
+  destinations:
+  - namespace: dev
+    server: https://kubernetes.default.svc
+  # Enables namespace orphaned resource monitoring.
+  orphanedResources:
+    warn: false
